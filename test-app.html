@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reg</title>
+    <link rel="stylesheet" href="../Project-Aimer/style.css">
+    <link rel="stylesheet" href="https://pyscript.net/releases/2024.1.1/core.css">
+    <link rel="manifest" href="../prok/manifest.webmanifest">
+</head>
+<body>
+<style>
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body, html {
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(to bottom, #031c7d, #2200ff);
+    overflow: hidden;
+}
+
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    width: 100%;
+    padding: 1rem;
+    animation: fadeIn 2s ease-in-out;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+form {
+    background: rgba(0, 0, 0, 0.6);
+    padding: 3rem 2.5rem;
+    border-radius: 15px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+    max-width: 400px;
+    width: 100%;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+    animation: bounceIn 1s ease;
+}
+
+@keyframes bounceIn {
+    0% { transform: scale(0.5); opacity: 0; }
+    60% { transform: scale(1.2); opacity: 1; }
+    100% { transform: scale(1); }
+}
+
+form::before {
+    content: "";
+    position: absolute;
+    top: -60px;
+    left: -60px;
+    width: 120px;
+    height: 120px;
+    background: rgba(255, 255, 255, 0.3);
+    border-radius: 50%;
+    animation: float 6s infinite ease-in-out;
+    z-index: 0;
+}
+
+form::after {
+    content: "";
+    position: absolute;
+    bottom: -60px;
+    right: -60px;
+    width: 120px;
+    height: 120px;
+    background: rgba(255, 255, 255, 0.3);
+    border-radius: 50%;
+    animation: float 6s infinite ease-in-out;
+    animation-delay: 3s;
+    z-index: 0;
+}
+
+@keyframes float {
+    0%, 100% { transform: translateY(0) translateX(0); }
+    50% { transform: translateY(-20px) translateX(20px); }
+}
+
+h2 {
+    margin-bottom: 1.5rem;
+    color: white;
+    position: relative;
+    z-index: 1;
+    animation: slideIn 1s ease;
+}
+
+@keyframes slideIn {
+    from { transform: translateY(-50px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+}
+
+label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: bold;
+    color: #555555;
+    position: relative;
+    z-index: 1;
+    animation: slideIn 1s ease;
+    animation-delay: 0.2s;
+}
+
+input[type="tel"],
+input[type="text"] {
+    width: 100%;
+    padding: 0.75rem;
+    margin-bottom: 1rem;
+    border: 1px solid #A9A9A9;
+    border-radius: 5px;
+    outline: none;
+    transition: border-color 0.3s, box-shadow 0.3s;
+    position: relative;
+    z-index: 1;
+    animation: slideIn 1s ease;
+    animation-delay: 0.4s;
+}
+
+input[type="tel"]:focus,
+input[type="text"]:focus {
+    border-color: #007bff;
+    box-shadow: 0 0 10px rgba(0, 123, 255, 0.5);
+}
+
+button {
+    background: #085588;
+    color: #ffffff;
+    border: none;
+    border-radius: 5px;
+    padding: 0.75rem 1.5rem;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: background-color 0.3s, box-shadow 0.3s;
+    position: relative;
+    z-index: 1;
+    animation: slideIn 1s ease;
+    animation-delay: 0.6s;
+    margin-top: 1rem;
+}
+
+button:hover {
+    background-color: #0056b3;
+    box-shadow: 0 5px 15px rgba(0, 91, 179, 0.4);
+}
+
+#error {
+    color: red;
+    margin-bottom: 1rem;
+    position: relative;
+    z-index: 1;
+    animation: slideIn 1s ease;
+    animation-delay: 0.8s;
+}
+
+/* Media Queries for Responsiveness */
+@media (max-width: 600px) {
+    form {
+        padding: 2rem 1.5rem;
+        border-radius: 10px;
+    }
+
+    h2 {
+        font-size: 1.5rem;
+    }
+
+    button {
+        padding: 0.5rem 1rem;
+        font-size: 0.9rem;
+    }
+}
+
+@media (max-width: 400px) {
+    form {
+        padding: 1.5rem 1rem;
+        border-radius: 8px;
+    }
+
+    h2 {
+        font-size: 1.2rem;
+    }
+
+    button {
+        padding: 0.5rem;
+        font-size: 0.8rem;
+    }
+}
+
+.button-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 1rem;
+}
+
+.button-container button {
+    flex: 1;
+    margin: 0 0.5rem;
+}
+
+.button-container button:first-child {
+    margin-left: 0;
+}
+
+.button-container button:last-child {
+    margin-right: 0;
+}
+</style>
+    <div class="container">
+        <form action="" id="main-form" onsubmit="return checkForm(event)" method="post">
+            <h2>Aimer</h2>
+            <label for="phone">Номер телефона</label>
+            <input type="tel" id="phone" name="phone" placeholder="Введите номер телефона">
+            <label for="sms-code">СМС код</label>
+            <input type="text" id="sms-code" name="sms-code" placeholder="Введите СМС код">
+            <div id="error"></div>
+            <div class="button-container">
+                <button type="button" id="sms-button" onclick="requestSmsCode()">СМС код</button>
+                <button type="submit">Авторизоваться</button>
+            </div>
+        </form>
+    </div>
+    <script>
+
+        let countdownInterval;
+
+        async function requestSmsCode() {
+            const phone = document.getElementById('phone').value;
+            if (phone === "") {
+                document.getElementById('error').innerText = "Введите номер телефона";
+                return;
+            }
+
+            try {
+                const response = await fetch('http://localhost:3000/api/request-sms-code', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ phone })
+                });
+                if (!response.ok) {
+                    if (response.status === 404) {
+                        document.getElementById('error').innerText = "Номер телефона не найден";
+                    } else if (response.status === 429) {
+                        const data = await response.json();
+                        document.getElementById('error').innerText = data.message;
+                        startCountdown(data.message.match(/\d+/)[0]);
+                    } else {
+                        throw new Error(`Ошибка HTTP: ${response.status}`);
+                    }
+                    return;
+                }
+                const data = await response.json();
+                alert(`Ваш СМС код отправлен на номер: ${phone}`);
+                startCountdown(90);
+            } catch (error) {
+                console.error('Ошибка при запросе СМС кода:', error);
+                document.getElementById('error').innerText = "Ошибка при запросе СМС кода";
+            }
+        }
+
+        function startCountdown(seconds) {
+            const button = document.getElementById('sms-button');
+            button.disabled = true;
+            let remainingTime = seconds;
+
+            countdownInterval = setInterval(() => {
+                if (remainingTime <= 0) {
+                    clearInterval(countdownInterval);
+                    button.disabled = false;
+                    button.innerText = 'СМС код';
+                } else {
+                    button.innerText = `Подождите ${remainingTime} секунд`;
+                    remainingTime--;
+                }
+            }, 1000);
+        }
+
+        async function checkForm(event) {
+            event.preventDefault(); // Предотвращаем стандартную отправку формы
+
+            let phone = event.target.phone.value;
+            let smsCode = event.target['sms-code'].value;
+            let fail = "";
+
+            if (phone == "" || smsCode == "") {
+                fail = "Заполните все поля";
+            }
+
+            if (fail != "") {
+                document.getElementById('error').innerText = fail;
+                return false;
+            }
+
+            // Отправляем запрос на сервер для проверки СМС кода
+            try {
+                const response = await fetch('http://localhost:3000/api/verify-sms-code', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ phone, smsCode })
+                });
+                if (!response.ok) {
+                    throw new Error(`Ошибка HTTP: ${response.status}`);
+                }
+                const data = await response.json();
+
+                if (data.success) {
+                    // Сохраняем данные пользователя в localStorage
+                    localStorage.setItem('user', JSON.stringify(data.user));
+                    // Перенаправляем на следующую страницу
+                    window.location.href = '../Project-Aimer/index1.html';
+                } else {
+                    document.getElementById('error').innerText = "Неверный СМС код или номер телефона";
+                }
+            } catch (error) {
+                console.error('Ошибка при выполнении запроса:', error);
+                document.getElementById('error').innerText = "Ошибка при выполнении запроса";
+            }
+        }
+
+
+
+    </script>
+</body>
+</html>
